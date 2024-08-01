@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PublicationRequest {
 
+
     @NotBlank
     private String title;
 

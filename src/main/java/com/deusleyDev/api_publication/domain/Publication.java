@@ -11,6 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 public class Publication {
 
+    private String id;
     private String title;
     private String imageUrl;
     private String text;

@@ -11,6 +11,6 @@ public class PublicationEntity {
     @MongoId
     private String id;
     private String title;
-    private String imgUrl;
+    private String imageUrl;
     private String text;
 }
