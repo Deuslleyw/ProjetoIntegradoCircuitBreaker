@@ -1,5 +1,6 @@
 package com.deusleyDev.api_publication.service;
 
+import com.deusleyDev.api_publication.client.CommentClient;
 import com.deusleyDev.api_publication.domain.Publication;
 import com.deusleyDev.api_publication.maper.PublicationMapper;
 import com.deusleyDev.api_publication.repository.PublicationRepository;
@@ -17,6 +18,9 @@ public class PublicationService {
     @Autowired
     private PublicationMapper publicationMapper;
 
+    @Autowired
+    private CommentClient commentClient;
+
 
     public void insert(Publication publication) {
 
@@ -30,7 +34,12 @@ public class PublicationService {
 
     }
     public Publication findById(String id){
-        return rep.findById(id).map(publicationMapper::toPublication).orElseThrow(RuntimeException::new);
+        var publication = rep.findById(id).map(publicationMapper::toPublication).orElseThrow(RuntimeException::new);
+
+        var comments = commentClient.getComments(id);
+        publication.setComments(comments);
+
+        return publication;
 
     }
 
