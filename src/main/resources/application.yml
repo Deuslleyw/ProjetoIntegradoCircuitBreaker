@@ -10,8 +10,6 @@ client:
   comments:
     url: http://localhost:8082
 
-
-
 resilience4j.circuitbreaker:
   instances:
     comments:

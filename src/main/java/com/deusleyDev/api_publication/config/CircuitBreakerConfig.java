@@ -33,7 +33,7 @@ public class CircuitBreakerConfig {
             public void onEntryReplacedEvent(EntryReplacedEvent<CircuitBreaker> entryReplacedEvent) {
 
             }
-        }
+        };
     }
 }
 
