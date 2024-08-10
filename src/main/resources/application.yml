@@ -9,3 +9,11 @@ spring:
 client:
   comments:
     url: http://localhost:8082
+
+
+
+resilience4j.circuitbreaker:
+  instances:
+    comments:
+      slidingWindowSize: 8
+      minimumOfCalls: 4

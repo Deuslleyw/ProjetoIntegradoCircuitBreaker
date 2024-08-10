@@ -4,6 +4,7 @@ import com.deusleyDev.api_publication.client.CommentClient;
 import com.deusleyDev.api_publication.domain.Publication;
 import com.deusleyDev.api_publication.maper.PublicationMapper;
 import com.deusleyDev.api_publication.repository.PublicationRepository;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +34,8 @@ public class PublicationService {
         return publications.stream().map(publicationMapper::toPublication).toList();
 
     }
+
+    @CircuitBreaker(name = "comments")
     public Publication findById(String id){
         var publication = rep.findById(id).map(publicationMapper::toPublication).orElseThrow(RuntimeException::new);
 
