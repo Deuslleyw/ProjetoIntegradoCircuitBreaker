@@ -23,6 +23,8 @@ public class ApiExceptionHandler {
                 .message(exception.getMessage())
                 .path(request.getRequestURI())
                 .build();
+        log.error("[ERROR] payload={}", error, exception);
+
         return ResponseEntity.internalServerError().body(error);
     }
 }

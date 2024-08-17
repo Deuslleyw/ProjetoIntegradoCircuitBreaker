@@ -1,16 +1,16 @@
 package com.deusleyDev.api_publication.service;
 
-import com.deusleyDev.api_publication.client.CommentClient;
 import com.deusleyDev.api_publication.domain.Publication;
 import com.deusleyDev.api_publication.maper.PublicationMapper;
 import com.deusleyDev.api_publication.repository.PublicationRepository;
-import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Slf4j
 public class PublicationService {
 
     @Autowired
@@ -20,7 +20,7 @@ public class PublicationService {
     private PublicationMapper publicationMapper;
 
     @Autowired
-    private CommentClient commentClient;
+    private CommentService commentService;
 
 
     public void insert(Publication publication) {
@@ -32,20 +32,17 @@ public class PublicationService {
     public List<Publication> findAll() {
         var publications = rep.findAll();
         return publications.stream().map(publicationMapper::toPublication).toList();
-
     }
-
-    @CircuitBreaker(name = "comments")
     public Publication findById(String id){
         var publication = rep.findById(id).map(publicationMapper::toPublication).orElseThrow(RuntimeException::new);
 
-        var comments = commentClient.getComments(id);
+        var comments = commentService.getComments(id);
         publication.setComments(comments);
 
         return publication;
 
     }
 
-
-
 }
+
+///DeusleyDiego
