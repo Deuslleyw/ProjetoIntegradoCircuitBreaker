@@ -8,14 +8,15 @@ spring:
 
 client:
   comments:
-    url: http://localhost:8082
+    url: http://localhost:8090
+
 
 resilience4j.circuitbreaker:
   instances:
     comments:
-      slidingWindowSize: 8
-      minimumNumberOfCalls: 4
-      # permittedNumberOfCallsInHalfOpenState: 2
-      # waiDurationInOpenState: 10000
-      # slowCallDurationThreshold: 2000
-      # slowCallRateThreshold: 50
+      slidingWindowSize: 4
+      minimumNumberOfCalls: 2
+      permittedNumberOfCallsInHalfOpenState: 2
+      waiDurationInOpenState: 10000
+      slowCallDurationThreshold: 2000
+      slowCallRateThreshold: 50
